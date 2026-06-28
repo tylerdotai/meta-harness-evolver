@@ -28,7 +28,7 @@ BEST_DIR       = WORKSPACE / "best" / "current"
 REPO_DIR       = WORKSPACE  # assumes repo is checked out at hermes-evolution/
 SKILL_SCRIPTS  = Path(__file__).parent
 
-SKIP_GIT = False  # set True if repo not ready
+GIT_HTTPS = True  # Use HTTPS + gh auth helper (SSH fails from this host)
 
 
 def run(script_name: str, *args, cwd=None):
@@ -115,7 +115,11 @@ def git_commit_push(candidate_num: int, score: float):
     git(["git", "commit", "-m", msg])
     print(f"\n[GIT] Committed: {msg}")
 
-    # Push
+    # Push via HTTPS using gh auth helper (SSH fails from this host)
+    git(["git", "remote", "set-url", "origin",
+         "https://github.com/tylerdotai/meta-harness-evolution.git"])
+    git(["git", "config", "credential.helper",
+         "/usr/bin/gh auth git-credential"])
     result = git(["git", "push", "origin", "main"])
     if result.returncode == 0:
         print("[GIT] Pushed to origin/main")
