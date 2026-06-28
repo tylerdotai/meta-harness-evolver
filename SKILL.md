@@ -14,8 +14,17 @@ Implements the **Meta-Harness** paper's outer-loop optimization for Johnny — T
 1. **Reads** Johnny's current workspace configs + all prior evolution logs
 2. **Proposes** a targeted harness modification via a coding-agent sub-agent
 3. **Evaluates** the proposed harness against a benchmark of ~20 diverse task scenarios
-4. **Logs** the candidate harness + scores + execution traces to the evolution filesystem
-5. **Delivers** a summary report to Tyler's home channel (Discord/Telegram)
+5. **Logs** the candidate harness + scores + execution traces to the evolution filesystem
+6. **Delivers** a summary report to Tyler's home channel (Telegram)
+
+## GitHub Repos
+
+| Repo | URL | Contents |
+|------|-----|----------|
+| `meta-harness-evolver` | github.com/tylerdotai/meta-harness-evolver | Skill scripts, SKILL.md, README |
+| `meta-harness-evolution` | github.com/tylerdotai/meta-harness-evolution | Evolution workspace: best harness, candidates, logs |
+
+The skill scripts push to `meta-harness-evolver` on improvement. The evolution workspace tracks locally and pushes best harness changes to `meta-harness-evolution` separately. Cron jobs handle both automatically.
 
 ## The Meta-Harness Loop
 
